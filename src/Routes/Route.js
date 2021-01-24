@@ -1,6 +1,8 @@
 import React from 'react'
 import {BrowserRouter , Switch, Route} from "react-router-dom"
 import Feed from '../Components/Home/Feed/Feed'
+import Login from '../Components/LoginSignUp/Login/Login'
+import SignUp from '../Components/LoginSignUp/SignUp/SignUp'
 
 function Router() {
   return (
@@ -8,11 +10,11 @@ function Router() {
       <BrowserRouter>
         <Switch>
             <Route exact path="/">
-                Login
+                <Login/>
             </Route>
 
             <Route exact path="/SignUp">
-                SignUp
+                <SignUp/>
             </Route>
 
             <Route exact path="/MeuEndereco">
