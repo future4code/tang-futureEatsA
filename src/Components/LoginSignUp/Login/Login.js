@@ -1,30 +1,41 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 export const useForm = (initialValues) => {
-    const [form, setForm] = useState(initialValues);
+    const [form, setForm] = useState(initialValues)
   
     const onChange = (value, name) => {
-      setForm({ ...form, [name]: value });
-    };
+      setForm({ ...form, [name]: value })
+    }
   
-    return { form, onChange };
-};
+    return { form, onChange }
+}
 
 function Login() {
-    const { form, onChange } = useForm({ email: '', senha: ''});
+    const { form, onChange } = useForm({ email: '', password: ''})
 
     const handleChange = (event) => {
-        const { value, name } = event.target;
-        onChange(value, name);
-    };
+        const { value, name } = event.target
+        onChange(value, name)
+    }
     
     const handleSubmit = (event) => {
-        event.preventDefault();
-        Login(form)
-    };
+        event.preventDefault()
+        Login()
+    }
 
-    const Login = (body) => {
-        console.log(body)
+    const Login = () => {
+        const body = {
+            email: form.email,
+            password: form.password
+        }
+        
+        axios
+        .post('https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/login',body)
+        .then(Response => {
+            window.localStorage.setItem("token", Response.data.token)
+        })
+        .catch(error => console.log(error))
     }
     
     return (
@@ -47,9 +58,9 @@ function Login() {
                         required
                     />
                     <input 
-                        name={"senha"} 
+                        name={"password"} 
                         type={"password"} 
-                        value={form.senha} 
+                        value={form.password} 
                         onChange={handleChange} 
                         required
                     />
