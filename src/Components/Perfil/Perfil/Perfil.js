@@ -27,9 +27,21 @@ function Perfil () {
         .catch(error => console.log(error))
     }
 
+    const historicoDeCompra = () => {
+        axios
+        .get("https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/orders/history", {
+            headers: {
+                "auth": window.localStorage.getItem("token")
+            }
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
+
     useEffect(() => {
         pegaTodoEndereco()
         pegaPerfil()
+        historicoDeCompra()
         console.log(endereco)
     }, [])
 
