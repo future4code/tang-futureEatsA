@@ -3,6 +3,8 @@ import {BrowserRouter , Switch, Route} from "react-router-dom"
 import Feed from '../Components/Home/Feed/Feed'
 import Login from '../Components/LoginSignUp/Login/Login'
 import SignUp from '../Components/LoginSignUp/SignUp/SignUp'
+import CadastroEndereco from '../Components/LoginSignUp/CadastroEndereco/CadastroEndereco'
+import Perfil from '../Components/Perfil/Perfil/Perfil'
 
 function Router() {
   return (
@@ -18,7 +20,7 @@ function Router() {
             </Route>
 
             <Route exact path="/MeuEndereco">
-                Cadastro de Endereco
+                <CadastroEndereco/>
             </Route>
 
             <Route exact path="/Feed">
@@ -38,7 +40,7 @@ function Router() {
             </Route>
 
             <Route exact path="/Perfil">
-                Perfil
+                <Perfil/>
             </Route>
 
             <Route exact path="/EditarCadastro">

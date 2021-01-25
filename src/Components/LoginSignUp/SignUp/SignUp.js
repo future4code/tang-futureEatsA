@@ -1,14 +1,15 @@
+import axios from 'axios';
 import React, {useState} from 'react'
 
 export const useForm = (initialValues) => {
-    const [form, setForm] = useState(initialValues);
+    const [form, setForm] = useState(initialValues)
   
     const onChange = (value, name) => {
-      setForm({ ...form, [name]: value });
-    };
+      setForm({ ...form, [name]: value })
+    }
   
-    return { form, onChange };
-};
+    return { form, onChange }
+}
 
 
 function SignUp() {
@@ -19,17 +20,33 @@ function SignUp() {
         cpf: '',
         password: '',
         passwordConfirm: ''
-    });
+    })
 
     const handleChange = (event) => {
         const { value, name } = event.target;
-        onChange(value, name);
-    };
+        onChange(value, name)
+    }
     
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(form);
-    };
+        event.preventDefault()
+        signUpFutureEats()
+    }
+
+    const signUpFutureEats = () => {
+        const body = {
+            name: form.name,
+            email: form.email,
+            cpf: form.cpf,
+            password: form.password
+        }
+
+        axios
+        .post('https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/signup',body)
+        .then(Response => {
+            window.localStorage.setItem("token", Response.data.token)
+        })
+        .catch(error => console.log(error))
+    }
 
     return (
         <div>
