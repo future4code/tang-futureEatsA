@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import {Header, Input, InputContainer} from './Styled'
 export default function Feed (){
+
+    const pegaRestaurantes = () => {
+        axios
+        .get("https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants", {
+            headers: {
+                "auth": window.localStorage.getItem("token")
+            }
+        })
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error))
+    }
+
+    useEffect(() => {
+        pegaRestaurantes()
+    },[])
+
     return(
         <div>
             <Header>

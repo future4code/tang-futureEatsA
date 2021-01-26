@@ -5,6 +5,8 @@ import Login from '../Components/LoginSignUp/Login/Login'
 import SignUp from '../Components/LoginSignUp/SignUp/SignUp'
 import CadastroEndereco from '../Components/LoginSignUp/CadastroEndereco/CadastroEndereco'
 import Perfil from '../Components/Perfil/Perfil/Perfil'
+import EditarCadastro from '../Components/Perfil/EditarCadastro/EditarCadastro'
+import Restaurante from '../Components/Restaurante/Restaurante/Restaurante'
 
 function Router() {
   return (
@@ -36,7 +38,7 @@ function Router() {
             </Route>
 
             <Route exact path="/Restaurante">
-                Restaurante
+                <Restaurante/>
             </Route>
 
             <Route exact path="/Perfil">
@@ -44,7 +46,7 @@ function Router() {
             </Route>
 
             <Route exact path="/EditarCadastro">
-                Editar Cadastro
+                <EditarCadastro/>
             </Route>
 
             <Route exact path="/EditarEndereco">
