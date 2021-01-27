@@ -1,24 +1,11 @@
 import axios from "axios"
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import GlobalStateContext from '../../../Global/GlobalStateContext'
 
-function Restaurante() {
-    const pegaRestaurantes = () => {
-        const restaurantId = 1
+function Restaurante(props) {
+    const data = useContext(GlobalStateContext)
 
-        axios
-            .get(`https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants/${restaurantId}`, {
-                headers: {
-                    "auth": window.localStorage.getItem("token")
-                }
-            })
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error))
-    }
-
-    useEffect(() => {
-        pegaRestaurantes()
-        console.log("oi")
-    }, [])
+    console.log(data.states.restauranteData)
 
     return <div>
         Restaurante

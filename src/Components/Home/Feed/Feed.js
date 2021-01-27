@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import {Header, Input, InputContainer} from './Styled'
-export default function Feed (){
+import FoodCard from '../../FoodCards/FoodCard'
+import GlobalStateContext from '../../../Global/GlobalStateContext'
+import { useHistory } from 'react-router-dom'
 
-    const pegaRestaurantes = () => {
-        axios
-        .get("https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants", {
-            headers: {
-                "auth": window.localStorage.getItem("token")
-            }
-        })
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error))
+export default function Feed (props){
+    const history = useHistory()
+    const data = useContext(GlobalStateContext)
+    const restaurantes = data.states.restaurantes
+
+    const pegaRestauranteId = (id) => {
+        data.setters.setRestauranteId(id)
+        history.push("restaurante")
     }
-
-    useEffect(() => {
-        pegaRestaurantes()
-    },[])
 
     return(
         <div>
@@ -40,8 +37,13 @@ export default function Feed (){
                 </div>
 
                 <div> 
-                    Ibagens
-                    <hr/>
+                    {restaurantes.map( array => {
+                        return <div key={array.id} onClick={() => {pegaRestauranteId(array.id)}}>
+                            <FoodCard
+                                restaurant={array}
+                            />
+                        </div>
+                    })}
                 </div>
             </main>
 
