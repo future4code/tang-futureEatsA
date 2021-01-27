@@ -4,14 +4,45 @@ import axios from "axios";
 import { useHistory } from 'react-router-dom'
 
 const GlobalState = (props) => {
-    const [login, setLogin] = useState([])
-    const [sign, setSogin] = useState([])
-    const [address, setAddress] = useState([])
-    const [carrinho, setCarrinho] = useState([])
-    const [busca, setBusca] = useState([])
+    const [restaurantes, setRestaurantes] = useState([])
+    const [restauranteId, setRestauranteId] = useState([])
+    const [restauranteData, setRestauranteData] = useState({})
 
-    const states = {}
-    const setters = {}
+    useEffect(() =>{
+        pegaRestaurantes()
+    }, [])
+
+    useEffect(() => {
+        if(restauranteId) {
+            pegaRestauranteId()
+        }
+    }, [restauranteId])
+
+    const pegaRestaurantes = () => {
+        axios
+        .get("https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants", {
+            headers: {
+                "auth": window.localStorage.getItem("token")
+            }
+        })
+        .then(response => setRestaurantes(response.data.restaurants))
+        .catch(error => console.log(error))
+    }
+
+    const pegaRestauranteId = () => {
+
+        axios
+            .get(`https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants/${restauranteId}`, {
+                headers: {
+                    "auth": window.localStorage.getItem("token")
+                }
+            })
+            .then(response => setRestauranteData(response.data))
+            .catch(error => console.log(error))
+    }
+
+    const states = {restaurantes, restauranteId, restauranteData}
+    const setters = {setRestaurantes, setRestauranteId}
     const requests = {}
 
     const data = { states, setters, requests }

@@ -7,6 +7,7 @@ import CadastroEndereco from '../Components/LoginSignUp/CadastroEndereco/Cadastr
 import Perfil from '../Components/Perfil/Perfil/Perfil'
 import EditarCadastro from '../Components/Perfil/EditarCadastro/EditarCadastro'
 import Restaurante from '../Components/Restaurante/Restaurante/Restaurante'
+import GlobalState from '../Global/GlobalState'
 
 function Router() {
   return (
@@ -26,7 +27,9 @@ function Router() {
             </Route>
 
             <Route exact path="/Feed">
-                <Feed/>
+                <GlobalState>
+                    <Feed/>
+                </GlobalState>
             </Route>
 
             <Route exact path="/Search">
@@ -38,7 +41,9 @@ function Router() {
             </Route>
 
             <Route exact path="/Restaurante">
-                <Restaurante/>
+                <GlobalState>
+                    <Restaurante/>
+                </GlobalState>
             </Route>
 
             <Route exact path="/Perfil">

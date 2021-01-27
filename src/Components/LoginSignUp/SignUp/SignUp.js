@@ -1,19 +1,22 @@
 import axios from 'axios';
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 export const useForm = (initialValues) => {
     const [form, setForm] = useState(initialValues)
-  
+
     const onChange = (value, name) => {
-      setForm({ ...form, [name]: value })
+        setForm({ ...form, [name]: value })
     }
-  
+
     return { form, onChange }
 }
 
 
 function SignUp() {
-    
+    const token = window.localStorage.getItem("token")
+    const hasAddress = window.localStorage.getItem("hasAddress")
+    const history = useHistory()
     const { form, onChange } = useForm({
         name: '',
         email: '',
@@ -22,11 +25,26 @@ function SignUp() {
         passwordConfirm: ''
     })
 
+    useEffect(() => {
+        checaDados()
+    }, [])
+
+    const checaDados = () => {
+        if (token) {
+            if (hasAddress) {
+                history.push('/Feed')
+            }
+            else {
+                history.push("/MeuEndereco")
+            }
+        }
+    }
+
     const handleChange = (event) => {
         const { value, name } = event.target;
         onChange(value, name)
     }
-    
+
     const handleSubmit = (event) => {
         event.preventDefault()
         signUpFutureEats()
@@ -41,11 +59,13 @@ function SignUp() {
         }
 
         axios
-        .post('https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/signup',body)
-        .then(Response => {
-            window.localStorage.setItem("token", Response.data.token)
-        })
-        .catch(error => console.log(error))
+            .post('https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/signup', body)
+            .then(Response => {
+                window.localStorage.setItem("token", Response.data.token)
+                window.localStorage.setItem("hasAddress", Response.data.user.hasAddress)
+                checaDados()
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -59,29 +79,26 @@ function SignUp() {
             </div>
 
             <div>
-                <form onSubmit={handleSubmit}> 
+                <form onSubmit={handleSubmit}>
                     <label> Nome </label>
-                    <input name='name' type='text' placeholder='Nome Completo' 
-                        value={form.name} onChange={handleChange}/>
+                    <input name='name' type='text' placeholder='Nome Completo'
+                        value={form.name} onChange={handleChange} />
                     <label> Email </label>
-                    <input name='email' type='email' placeholder='email@example.com' 
-                        value={form.email} onChange={handleChange}/>
+                    <input name='email' type='email' placeholder='email@example.com'
+                        value={form.email} onChange={handleChange} />
                     <label> Cpf </label>
-                    <input name='cpf' type='text' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-                        placeholder='000.000.000-00' value={form.cpf} onChange={handleChange}/>
+                    <input name='cpf' type='text' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                        placeholder='000.000.000-00' value={form.cpf} onChange={handleChange} />
                     <label> Senha </label>
                     <input name='password' type='password' placeholder='Mínimo 6 caracteres'
-                        value={form.password} onChange={handleChange}/>
+                        value={form.password} onChange={handleChange} />
                     <label> Confirme a senha </label>
-                    <input name='passwordConfirm' type='password' placeholder='Mínimo 6 caracteres' 
-                        value={form.passwordConfirm} onChange={handleChange}/>
+                    <input name='passwordConfirm' type='password' placeholder='Mínimo 6 caracteres'
+                        value={form.passwordConfirm} onChange={handleChange} />
                     <button type='submit'> Entrar </button>
                 </form>
             </div>
 
-            <div>
-                Não possui Cadastro clique aqui
-            </div>
         </div>
     );
 }

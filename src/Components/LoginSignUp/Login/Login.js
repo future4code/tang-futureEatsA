@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 export const useForm = (initialValues) => {
     const [form, setForm] = useState(initialValues)
@@ -12,7 +13,25 @@ export const useForm = (initialValues) => {
 }
 
 function Login() {
+    const token = window.localStorage.getItem("token")
+    const hasAddress = window.localStorage.getItem("hasAddress")
     const { form, onChange } = useForm({ email: '', password: ''})
+    const history = useHistory()
+
+    useEffect(() => {
+        checaDados()
+    }, [])
+
+    const checaDados = () => {
+        if(token){
+            if(hasAddress){
+                history.push('/Feed')
+            }
+            else{
+                history.push("/MeuEndereco")
+            }
+        }
+    }
 
     const handleChange = (event) => {
         const { value, name } = event.target
@@ -34,6 +53,8 @@ function Login() {
         .post('https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/login',body)
         .then(Response => {
             window.localStorage.setItem("token", Response.data.token)
+            window.localStorage.setItem("hasAddress", Response.data.user.hasAddress)
+            checaDados()
         })
         .catch(error => console.log(error))
     }
@@ -69,7 +90,7 @@ function Login() {
             </div>
 
             <div>
-                Não possui Cadastro clique aqui
+                <span>Não possui Cadastro?</span> <button onClick={() => {history.push("/SignUp")}}>clique aqui</button>
             </div>
         </div>
     );
