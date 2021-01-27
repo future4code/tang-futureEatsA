@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+<<<<<<< Updated upstream
 import {Header, Input, InputContainer} from './Styled'
 import FoodCard from '../../FoodCards/FoodCard'
 import GlobalStateContext from '../../../Global/GlobalStateContext'
@@ -16,6 +17,12 @@ export default function Feed (props){
     }
 
     return(
+=======
+import { Header, Input, InputContainer } from './Styled'
+
+export default function Feed() {
+    return (
+>>>>>>> Stashed changes
         <div>
             <Header>
                 <h1>Labe Eats</h1>
@@ -23,19 +30,20 @@ export default function Feed (props){
             {/* Só dando uma ideia geral mesmo esses 
             <hr/> ai são só pra dividir sem usar o css msm 
             antes de fazer tudo esses spans tb pra ver como ficaria + - */}
-            <main> 
+            <main>
                 <InputContainer>
-                    <Input name="search" placeholder="Restaurante" type="text"/>
+                    <Input name="search" placeholder="Restaurante" type="text" />
                 </InputContainer>
-                
-                <div> 
+
+                <div>
                     <span> Árabe </span>
                     <span> Asiática </span>
                     <span> Hamburguer </span>
                     <span> Italiana </span>
-                    <hr/>
+                    <hr />
                 </div>
 
+<<<<<<< Updated upstream
                 <div> 
                     {restaurantes.map( array => {
                         return <div key={array.id} onClick={() => {pegaRestauranteId(array.id)}}>
@@ -44,6 +52,11 @@ export default function Feed (props){
                             />
                         </div>
                     })}
+=======
+                <div>
+                    Ibagens
+                    <hr />
+>>>>>>> Stashed changes
                 </div>
             </main>
 
