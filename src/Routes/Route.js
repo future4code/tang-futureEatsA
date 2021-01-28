@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 import Feed from '../Components/Home/Feed/Feed';
 import Login from '../Components/LoginSignUp/Login/Login';
 import SignUp from '../Components/LoginSignUp/SignUp/SignUp';
@@ -8,8 +8,11 @@ import Perfil from '../Components/Perfil/Perfil/Perfil';
 import EditarCadastro from '../Components/Perfil/EditarCadastro/EditarCadastro';
 import Restaurante from '../Components/Restaurante/Restaurante/Restaurante';
 import GlobalState from '../Global/GlobalState';
+import Carrinho from '../Components/Carrinho/Carrinho';
 
 function Router() {
+	const history = useHistory()
+
 	return (
 		<div>
 			<BrowserRouter>
@@ -29,6 +32,7 @@ function Router() {
 					<Route exact path="/Feed">
 						<GlobalState>
 							<Feed />
+							
 						</GlobalState>
 					</Route>
 
@@ -37,7 +41,11 @@ function Router() {
 					</Route>
 
 					<Route exact path="/Carrinho">
-						Carrinho
+						
+						<GlobalState>
+							<Carrinho/>
+							
+						</GlobalState>
 					</Route>
 
 					<Route exact path="/Restaurante/:Restaurante">

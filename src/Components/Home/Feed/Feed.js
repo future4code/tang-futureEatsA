@@ -10,9 +10,9 @@ export default function Feed() {
 	const data = useContext(GlobalStateContext);
 	const restaurantes = data.states.restaurantes;
 
-	const pegaRestauranteId = (id) => {
+	const pegaRestauranteId = (id, name) => {
 		data.setters.setRestauranteId(id);
-		history.push(`restaurante/${restaurantes.name}`);
+		history.push(`restaurante/${name}`);
 	};
 
 	return (
@@ -44,7 +44,7 @@ export default function Feed() {
 							<div
 								key={array.id}
 								onClick={() => {
-									pegaRestauranteId(array.id);
+									pegaRestauranteId(array.id, array.name);
 								}}
 							>
 								<FoodCard restaurant={array} />
@@ -54,7 +54,11 @@ export default function Feed() {
 				</div>
 			</main>
 
-			<footer>faixa com coisas de footer</footer>
+			<footer>
+				<button onClick={() => {history.push("feed")}}>Home</button>
+				<button onClick={() => {history.push("Carrinho")}}>Carrinho</button>
+				<button onClick={() => {history.push("Perfil")}}>Perfil</button>
+			</footer>
 		</div>
 	);
 }

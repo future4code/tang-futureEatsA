@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Perfil() {
+	const history = useHistory();
 	const [endereco, setEndereco] = useState({});
 	const [perfil, setPerfil] = useState({});
 
@@ -54,7 +56,13 @@ function Perfil() {
 		console.log(endereco);
 	}, []);
 
-	return <div>Perfil</div>;
+	return <div>Perfil
+		<footer>
+			<button onClick={() => { history.push("feed") }}>Home</button>
+			<button onClick={() => { history.push("Carrinho") }}>Carrinho</button>
+			<button onClick={() => { history.push("Perfil") }}>Perfil</button>
+		</footer>
+	</div>;
 }
 
 export default Perfil;

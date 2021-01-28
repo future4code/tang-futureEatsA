@@ -1,25 +1,34 @@
 import axios from 'axios';
 import React, { useEffect, useContext } from 'react';
 import GlobalStateContext from '../../../Global/GlobalStateContext';
+import ProductCard from '../../ProductCards/ProductCard'
 
 function Restaurante(props) {
 	const data = useContext(GlobalStateContext);
-	const restaurantes = data.states.restaurantes;
-	console.log(restaurantes);
+    const restaurante = data.states.restauranteData;
+	
 	return (
 		<div>
 			<div>
-				<img src={restaurantes[0].logoUrl} alt="" />
-				<h3>{restaurantes[0].name}</h3>
-				<p>{restaurantes[0].category}</p>
+				<img src={restaurante.logoUrl} alt="" />
+				<h3>{restaurante.name}</h3>
+				<p>{restaurante.category}</p>
 				<p>
-					<span>{restaurantes[0].deliveryTime} min </span>
-					<span>Frete: R$ {restaurantes[0].shipping},00</span>
+					<span>{restaurante.deliveryTime} min </span>
+					<span>Frete: R$ {restaurante.shipping},00</span>
 				</p>
-				<p>{restaurantes[0].address}</p>
+				<p>{restaurante.address}</p>
 			</div>
 
-			<div></div>
+			<div>
+                {data.states.produtos.map(produto => {
+                    return <div key={produto.id}>
+                        <ProductCard
+                            product={produto}
+                        />
+                    </div>
+                })}
+            </div>
 		</div>
 	);
 }
