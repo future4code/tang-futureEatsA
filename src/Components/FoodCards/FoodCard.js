@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainDiv, DivImg, DivDetalhes, Img, P } from './Styled';
+import { MainDiv, DivImg, DivDetalhes, Img, P , Title } from './Styled';
 
 export default function FoodCard(props) {
 	return (
@@ -7,11 +7,11 @@ export default function FoodCard(props) {
 			<DivImg>
 				<Img src={props.restaurant.logoUrl} />
 			</DivImg>
-			<div>
+			<Title>
 				<h3>{props.restaurant.name}</h3>
-			</div>
+			</Title>
 			<DivDetalhes>
-				<P>{props.restaurant.deliveryTime}-min </P>
+				<P>{props.restaurant.deliveryTime} - min </P>
 				<P>Frete R${props.restaurant.shipping},00</P>
 			</DivDetalhes>
 		</MainDiv>

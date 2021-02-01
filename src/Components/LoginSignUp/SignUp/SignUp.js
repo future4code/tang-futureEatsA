@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ImgContainer, Img, P, Button, Div, Form } from './Styled'
+import Logo from '../../../Assets/logo-future-eats-invert@3x.png'
+import TextField from '@material-ui/core/TextField'
 
 export const useForm = (initialValues) => {
 	const [form, setForm] = useState(initialValues);
@@ -63,67 +66,74 @@ function SignUp() {
 			)
 			.then((Response) => {
 				window.localStorage.setItem('token', Response.data.token);
-				window.localStorage.setItem(
-					'hasAddress',
-					Response.data.user.hasAddress
-				);
-				checaDados();
+				window.localStorage.setItem('hasAddress', Response.data.user.hasAddress);
+				history.push("/meuEndereco")
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => alert(error));
 	};
 
 	return (
 		<div>
-			<div>Future Eats</div>
+			<ImgContainer>
+				<Img src={Logo} />
+			</ImgContainer>
 
-			<div>Cadastrar</div>
+			<P>Cadastrar</P>
 
-			<div>
-				<form onSubmit={handleSubmit}>
-					<label> Nome </label>
-					<input
+			<Form onSubmit={handleSubmit}>
+				<Div>
+					<TextField id="outlined-basic" label="Nome" variant="outlined"
 						name="name"
 						type="text"
 						placeholder="Nome Completo"
 						value={form.name}
 						onChange={handleChange}
+						required
 					/>
-					<label> Email </label>
-					<input
+				</Div>
+				<Div>
+					<TextField id="outlined-basic" label="Email" variant="outlined"
 						name="email"
 						type="email"
 						placeholder="email@example.com"
 						value={form.email}
 						onChange={handleChange}
+						required
 					/>
-					<label> Cpf </label>
-					<input
+				</Div>
+				<Div>
+					<TextField id="outlined-basic" label="Cpf" variant="outlined"
 						name="cpf"
 						type="text"
 						pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
 						placeholder="000.000.000-00"
 						value={form.cpf}
 						onChange={handleChange}
+						required
 					/>
-					<label> Senha </label>
-					<input
+				</Div>
+				<Div>
+					<TextField id="outlined-basic" label="Senha" variant="outlined"
 						name="password"
 						type="password"
 						placeholder="Mínimo 6 caracteres"
 						value={form.password}
 						onChange={handleChange}
+						required
 					/>
-					<label> Confirme a senha </label>
-					<input
+				</Div>
+				<Div>
+					<TextField id="outlined-basic" label="Confirme a senha" variant="outlined"
 						name="passwordConfirm"
 						type="password"
 						placeholder="Mínimo 6 caracteres"
 						value={form.passwordConfirm}
 						onChange={handleChange}
+						required
 					/>
-					<button type="submit"> Entrar </button>
-				</form>
-			</div>
+				</Div>
+				<Button type="submit"> Enviar </Button>
+			</Form>
 		</div>
 	);
 }
