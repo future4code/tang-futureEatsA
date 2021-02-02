@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Back from '../../../Assets/back@3x.png';
@@ -49,7 +49,7 @@ function EditarCadastro() {
 					},
 				}
 			)
-			.then((response) => console.log(response))
+			.then((response) => response)
 			.catch((error) => console.log(error));
 	};
 
@@ -61,7 +61,7 @@ function EditarCadastro() {
 				<Img onClick={() => {history.goBack()}} src={Back}/>
 				<P>Editar</P>
 			</Header>
-			
+			<hr/>
 			<Form onSubmit={handleSubmit}>
 				<Div>
 					<TextField id="outlined-basic" label="Nome" variant="outlined"
