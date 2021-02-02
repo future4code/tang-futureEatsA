@@ -1,5 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Back from '../../../Assets/back@3x.png';
+import {Header, Img, P, Form, Div, Button} from './Styled';
 
 export const useForm = (initialValues) => {
 	const [form, setForm] = useState(initialValues);
@@ -49,29 +53,38 @@ function EditarCadastro() {
 			.catch((error) => console.log(error));
 	};
 
+	const history = useHistory();
+
 	return (
 		<div>
-			Edição de Cadastro
-			<div>
-				<form onSubmit={handleSubmit}>
-					<label> Nome </label>
-					<input
+			<Header> 
+				<Img onClick={() => {history.goBack()}} src={Back}/>
+				<P>Editar</P>
+			</Header>
+			
+			<Form onSubmit={handleSubmit}>
+				<Div>
+					<TextField id="outlined-basic" label="Nome" variant="outlined"
 						name="name"
 						type="text"
 						placeholder="Nome Completo"
 						value={form.name}
 						onChange={handleChange}
 					/>
-					<label> Email </label>
-					<input
+				</Div>
+				
+				<Div>
+					<TextField id="outlined-basic" label="Email" variant="outlined"
 						name="email"
 						type="email"
 						placeholder="email@example.com"
 						value={form.email}
 						onChange={handleChange}
 					/>
-					<label> Cpf </label>
-					<input
+				</Div>
+				
+				<Div>
+					<TextField id="outlined-basic" label="Cpf" variant="outlined"
 						name="cpf"
 						type="text"
 						pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
@@ -79,9 +92,9 @@ function EditarCadastro() {
 						value={form.cpf}
 						onChange={handleChange}
 					/>
-					<button type="submit"> Entrar </button>
-				</form>
-			</div>
+				</Div>
+				<Button type="submit"> Entrar </Button>
+			</Form>
 		</div>
 	);
 }

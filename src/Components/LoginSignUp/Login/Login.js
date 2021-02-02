@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ImgContainer, Img, P, Form, Button, Cadastrar, Btn, Div } from './styled'
+import Logo from '../../../Assets/logo-future-eats-invert@3x.png'
+import TextField from '@material-ui/core/TextField'
 
 export const useForm = (initialValues) => {
 	const [form, setForm] = useState(initialValues);
@@ -19,12 +22,12 @@ function Login() {
 	const history = useHistory();
 
 	useEffect(() => {
-		checaDados();
-	}, []);
+		checaDados(token, hasAddress);
+	}, [token, hasAddress])
 
-	const checaDados = () => {
+	const checaDados = (token, hasAddress) => {
 		if (token) {
-			if (hasAddress) {
+			if (hasAddress !== false) {
 				history.push('/Feed');
 			} else {
 				history.push('/MeuEndereco');
@@ -55,51 +58,59 @@ function Login() {
 			)
 			.then((Response) => {
 				window.localStorage.setItem('token', Response.data.token);
-				window.localStorage.setItem(
-					'hasAddress',
-					Response.data.user.hasAddress
-				);
-				checaDados();
+				window.localStorage.setItem('hasAddress', Response.data.user.hasAddress);
+				history.push("/feed")
 			})
 			.catch((error) => console.log(error));
 	};
 
 	return (
 		<div>
-			<div>Future Eats</div>
 
-			<div>Entrar</div>
+			<ImgContainer>
+				<Img src={Logo} />
+			</ImgContainer>
 
-			<div>
-				<form onSubmit={handleSubmit}>
-					<input
+			<P>Entrar</P>
+
+
+			<Form onSubmit={handleSubmit}>
+
+				<Div>
+					<TextField id="outlined-basic" label="Email" variant="outlined"
 						name={'email'}
 						type={'text'}
+						placeholder={'email@example.com'}
 						value={form.email}
 						onChange={handleChange}
 						required
 					/>
-					<input
+				</Div>
+
+
+				<Div>
+					<TextField id="outlined-basic" label="Senha" variant="outlined"
 						name={'password'}
 						type={'password'}
+						placeholder={'Minimo 6 caracteres'}
 						value={form.password}
 						onChange={handleChange}
 						required
 					/>
-					<button>Entrar</button>
-				</form>
-			</div>
+				</Div>
+				<Button>Entrar</Button>
+			</Form>
 
-			<div>
+			<Cadastrar>
 				<span>Não possui Cadastro?</span>{' '}
-				<button
+				<Btn
 					onClick={() => {
 						history.push('/SignUp');
 					}}
 				>
 					clique aqui
-				</button>
-			</div>
+				</Btn>
+			</Cadastrar>
 		</div>
 	);
 }
