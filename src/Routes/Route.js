@@ -11,6 +11,7 @@ import Carrinho from '../Components/Carrinho/Carrinho';
 import Footer from '../Components/Footer/Footer'
 import PedidoEmAndamento from '../Components/PedidoEmAndamento/PedidoEmAndamento'
 import GlobalStateContext from '../Global/GlobalStateContext';
+import Search from "../Components/Home/Search/Search"
 
 function Router() {
 	//constantes do footer
@@ -53,7 +54,7 @@ function Router() {
 					</Route>
 
 					<Route exact path="/Search">
-						
+						<Search/>
 					</Route>
 
 					<Route exact path="/Carrinho">

@@ -38,6 +38,7 @@ export default function Feed() {
 						name={"search"}
 						placeholder={"Restaurante"}
 						type={"text"}
+						onClick={() => {history.push("/search")}}
 					/>
 				</InputContainer>
 
