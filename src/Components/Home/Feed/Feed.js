@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { H1,InputContainer, Input, Div, Filtro, Span, SpanAtivado } from './Styled';
 import FoodCard from '../../FoodCards/FoodCard';
 import GlobalStateContext from '../../../Global/GlobalStateContext';

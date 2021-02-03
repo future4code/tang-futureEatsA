@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField'
 
 export const H1 = styled.p`
-	margin: 10px 0;
+	padding: 10px 0;
 	font-size: 1.5em;
 	text-align: center;
 `;

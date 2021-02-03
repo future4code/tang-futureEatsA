@@ -13,3 +13,17 @@ export const Endereco = styled.div`
     background-color: #eeeeee;
     padding: 10px;
 `
+
+export const DivEdit = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+export const Img = styled.img`
+    height: 23px;
+    width: 24px;
+`
+
+export const Body = styled.div`
+margin-bottom: 55px;
+`

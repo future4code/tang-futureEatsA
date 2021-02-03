@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const H3 = styled.h3`
     text-align: center;
-    margin: 10px;
+    padding: 10px;
 `
 
 export const Endereco = styled.div`

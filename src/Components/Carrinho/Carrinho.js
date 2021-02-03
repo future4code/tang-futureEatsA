@@ -1,17 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import GlobalStateContext from '../../Global/GlobalStateContext';
 import ProductCard from '../ProductCards/ProductCard';
 import { H3, P, Endereco, Div, Nome, Valor, Frete, Input, Button, DivPrincipal, CarrinhoVazio} from './Styled'
 
 export default function Carrinho(props) {
     const data = useContext(GlobalStateContext)
-    const [metodoDePagamento, setMetodoDePagamento] = useState("")
-    console.log(data.states.carrinho);
-    console.log(data.states.carrinhoRestaurantData);
-    console.log(data.states.carrinhoDePostagem);
-    console.log(data.states.perfil);
-    console.log(data.states.valorTotal);
 
     const confirmaPedido = () => {
         const restaurantId = data.states.carrinhoRestaurantData.id;
@@ -29,10 +23,16 @@ export default function Carrinho(props) {
             .then((response) => data.requests.verificaPedido())
             .catch((error) => console.log(error));
     }
-
-    const removeDoCarrinho = (id, price, category, description, name, photoUrl, quantity ) => {
-        console.log("removido")
+    //REMOVE ITEM DO CARRINHO
+    const removeDoCarrinho = (id, price, quantity ) => {
         data.setters.setValorTotal(data.states.valorTotal - (quantity * price))
+        const novoCarrinho = data.states.carrinho.filter(array => array.id !== id)
+        data.setters.setCarrinho(novoCarrinho)
+        data.setters.setCarrinhoDePostagem(novoCarrinho)
+        if(data.states.carrinho.length === 1){
+            data.setters.setCarrinhoRestaurantData([])
+            data.setters.setValorTotal(-data.states.carrinhoRestaurantData.shipping)
+        }
     }
 
     return <DivPrincipal>
@@ -56,7 +56,7 @@ export default function Carrinho(props) {
             {data.states.carrinho.map(produto => {
                 return <div key={produto.id}>
                     <ProductCard
-                        funcaoCardB={() => {removeDoCarrinho(produto.id, produto.price, produto.category, produto.description, produto.name, produto.photoUrl, produto.quantity)}}
+                        funcaoCardB={() => {removeDoCarrinho(produto.id, produto.price, produto.quantity)}}
                         product={produto}
                     />
                 </div>
@@ -78,7 +78,6 @@ export default function Carrinho(props) {
         <Input
           type="checkbox"
           defaultChecked={false}
-          onClick={()=> {setMetodoDePagamento("Dinheiro")}}
         />
         <label>
             Dinheiro
@@ -87,7 +86,6 @@ export default function Carrinho(props) {
         <Input
           type="checkbox"
           defaultChecked={false}
-          onClick={()=> {setMetodoDePagamento("Cartão de credito")}}
         />
         <label>
             Cartão de credito
