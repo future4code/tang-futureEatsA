@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ImgContainer, Img, P, Form, Button, Cadastrar, Btn, Div } from './styled'
+import { ImgContainer, Img, P, Form, Button, Cadastrar, Btn, Div, SenhaVisual, SenhaVisualImg, DiviGrande } from './styled'
 import Logo from '../../../Assets/logo-future-eats-invert@3x.png'
 import TextField from '@material-ui/core/TextField'
+import SenhaOn from "../../../Assets/senha-2@3x.png"
+import SenhaOff from "../../../Assets/senha@3x.png"
 
 export const useForm = (initialValues) => {
 	const [form, setForm] = useState(initialValues);
@@ -20,6 +22,7 @@ function Login() {
 	const hasAddress = window.localStorage.getItem('hasAddress');
 	const { form, onChange } = useForm({ email: '', password: '' });
 	const history = useHistory();
+	const [senha, setSenha] = useState(true)
 
 	useEffect(() => {
 		checaDados(token, hasAddress);
@@ -76,6 +79,7 @@ function Login() {
 
 			<Form onSubmit={handleSubmit}>
 
+				<DiviGrande>
 				<Div>
 					<TextField id="outlined-basic" label="Email" variant="outlined"
 						name={'email'}
@@ -91,13 +95,15 @@ function Login() {
 				<Div>
 					<TextField id="outlined-basic" label="Senha" variant="outlined"
 						name={'password'}
-						type={'password'}
+						type={senha ? 'password' : 'text'}
 						placeholder={'Minimo 6 caracteres'}
 						value={form.password}
 						onChange={handleChange}
 						required
 					/>
+					<SenhaVisual onClick={() => {setSenha(!senha)}}>{senha ? <SenhaVisualImg src={SenhaOff}/> : <SenhaVisualImg src={SenhaOn}/>}</SenhaVisual>
 				</Div>
+				</DiviGrande>
 				<Button>Entrar</Button>
 			</Form>
 

@@ -5,7 +5,7 @@ export const Image = styled.img`
 `
 export const Div = styled.div`
     position: fixed;
-    bottom: 0;
+    bottom: -4px;
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
     width: 100%;

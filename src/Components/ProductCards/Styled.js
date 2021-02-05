@@ -3,7 +3,10 @@ import styled from 'styled-components'
 export const Div = styled.div`
     border: 1px solid black;
     margin: 10px auto;
-    width: 90%;
+    width: 50%;
+    @media (max-width: 768px){
+        width: 90%;
+    }
     border-radius: 8px;
     display: grid;
     grid-template: 1fr/1fr 2fr;
@@ -13,7 +16,7 @@ export const Img = styled.img`
 	width: 100%;
     height: 100%;
     max-height: 95px;
-    object-fit: cover;
+    object-fit: fill;
 	border-radius: 8px;
 `;
 

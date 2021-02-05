@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { H1,InputContainer, Input, Div, Filtro, Span, SpanAtivado } from './Styled';
 import FoodCard from '../../FoodCards/FoodCard';
 import GlobalStateContext from '../../../Global/GlobalStateContext';
@@ -25,8 +25,17 @@ export default function Feed() {
 	//Coleta a ID do restaurante
 	const pegaRestauranteId = (id, name) => {
 		data.setters.setRestauranteId(id);
+		
 		history.push(`restaurante/${name}`);
 	};
+
+	useEffect(() => {
+		data.requests.verificaPedido()
+		data.requests.pegaRestaurantes() 
+		data.requests.pegaTodoEndereco()
+		data.requests.pegaPerfil() 
+		data.requests.pegaHistoricoDeCompra()
+	}, [])
 
 	return (
 		<Div>
@@ -172,7 +181,7 @@ export default function Feed() {
 						setPetiscos(false)
 						setMexicana(true)
 					}}> Mexicana </Span>}
-					<hr />
+					
 				</Filtro>
 
 				<div>
