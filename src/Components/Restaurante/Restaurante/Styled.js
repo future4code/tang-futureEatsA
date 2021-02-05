@@ -16,10 +16,12 @@ export const P = styled.p`
 `
 
 export const Div = styled.div`
-    
+    width: 50%;
     margin: 10px auto;
-    width: 90%;
     border-radius: 8px;
+    @media (max-width: 768px){
+        width: 90%;
+    }
 `
 
 export const Logo = styled.img`
@@ -33,5 +35,10 @@ export const H3 = styled.h3`
 `
 
 export const Hr = styled.div`
-    margin: 20px;
+    width: 50%;
+    
+    @media (max-width: 768px){
+        width: 90%;
+    }
+    margin: 20px auto;
 `

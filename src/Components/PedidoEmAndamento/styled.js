@@ -4,7 +4,7 @@ export const Div = styled.div`
     background-color: green;
     position: fixed;
     height: 128px;
-    bottom: 0;
+    bottom: -4px;
     margin: 37px 0;
     width: 100%;
     display: grid;

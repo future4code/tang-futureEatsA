@@ -12,6 +12,7 @@ import Footer from '../Components/Footer/Footer'
 import PedidoEmAndamento from '../Components/PedidoEmAndamento/PedidoEmAndamento'
 import GlobalStateContext from '../Global/GlobalStateContext';
 import Search from "../Components/Home/Search/Search"
+import TelaDeLoading from '../Components/TelaDeLoading/TelaDeLoading'
 
 function Router() {
 	//constantes do footer
@@ -20,10 +21,23 @@ function Router() {
 	const [perfil, setPerfil] = useState(false)
 	//dados do GlobalState
 	const data = useContext(GlobalStateContext)
+	//Tela de loading
+	const [telaDeLoading, setTelaDeLoading] = useState(false)
 
+	function loading() {
+		return new Promise(resolve => {
+		  setTimeout(() => {
+			setTelaDeLoading(true)
+		  }, 3000);
+		});
+	}
+
+	loading()
+	
 	return (
 		<div>
-			<BrowserRouter>
+			{telaDeLoading ? <BrowserRouter>
+
 				<Switch>
 					<Route exact path="/">
 						<Login />
@@ -89,7 +103,8 @@ function Router() {
 						<EditarCadastro />
 					</Route>
 				</Switch>
-			</BrowserRouter>
+			</BrowserRouter> : 
+			<TelaDeLoading/>}
 		</div>
 	);
 }

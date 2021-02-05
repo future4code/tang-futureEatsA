@@ -14,7 +14,11 @@ export const InputContainer = styled.div`
 `;
 
 export const Input = styled(TextField)`
-	width: 90%;
+	width: 70%;
+	@media (max-width: 425px){
+		width: 90%;
+	}
+	
 `
 export const Div = styled.div`
 	margin-bottom: 50px;
@@ -23,6 +27,10 @@ export const Div = styled.div`
 export const Filtro = styled.div`
 	display: flex;
 	overflow-x: scroll;
+	@media (min-width: 541px){
+		justify-content: center;
+		overflow-x: hidden;
+	}
 `
 
 export const Span = styled.span`

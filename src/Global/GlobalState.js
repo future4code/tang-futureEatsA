@@ -127,7 +127,7 @@ const GlobalState = (props) => {
 
     const states = { restaurantes, restauranteId, restauranteData, produtos, carrinho, pedidoConfirmado, carrinhoRestaurantData, carrinhoDePostagem, perfil, historicoDeCompra, endereco, valorTotal }
     const setters = { setRestaurantes, setRestauranteId, setCarrinho, setCarrinhoRestaurantData, setCarrinhoDePostagem, setPerfil, setHistoricoDeCompra, setEndereco, setValorTotal }
-    const requests = { verificaPedido }
+    const requests = {verificaPedido, pegaRestaurantes, pegaTodoEndereco, pegaPerfil, pegaHistoricoDeCompra, pegaRestauranteId}
 
     const data = { states, setters, requests }
 

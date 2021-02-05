@@ -52,4 +52,24 @@ export const Btn = styled.button`
 export const Div = styled.div`
     margin: 10px 0;
     text-align: center;
+    position: relative;
+    width: 222px;
+`
+
+export const SenhaVisual = styled.div`
+    position: absolute;
+    transform: translate(188px, -36px);
+    height: 24px;
+    width: 24px;
+`
+
+export const SenhaVisualImg = styled.img`
+    height: 100%;
+    width: 100%;
+`
+
+export const DiviGrande = styled.div`
+margin: 0px auto;
+text-align: center;
+position: relative;
 `

@@ -27,3 +27,9 @@ export const Img = styled.img`
 export const Body = styled.div`
 margin-bottom: 55px;
 `
+
+export const DivNav = styled.div`
+    display: grid;
+    grid-template: 1fr / 15fr 1fr;
+    align-items: center;
+`

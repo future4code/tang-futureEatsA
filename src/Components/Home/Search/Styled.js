@@ -29,7 +29,11 @@ export const InputContainer = styled.div`
 `;
 
 export const Input = styled(TextField)`
-	width: 90%;
+	width: 70%;
+	@media (max-width: 425px){
+		width: 90%;
+	}
+
 `
 export const Div = styled.div`
 	margin-bottom: 50px;

@@ -11,7 +11,10 @@ export default function Search() {
 	const history = useHistory();
 	const data = useContext(GlobalStateContext);
 	const restaurantes = data.states.restaurantes;
-	let restauranteFiltrado = restaurantes.filter(array => array.name.indexOf(filtro) > -1)
+	let restauranteFiltrado = restaurantes.filter(array => {
+		const name = array.name.toLowerCase()
+		return name.indexOf(filtro.toLowerCase()) > -1
+	})
 	//Coleta a ID do restaurante
 	const pegaRestauranteId = (id, name) => {
 		data.setters.setRestauranteId(id);
@@ -22,7 +25,7 @@ export default function Search() {
 		<Div>
 			<Header> 
 				<div><Img onClick={() => {history.goBack()}} src={Back}/></div>
-				<P>Editar</P>
+				<P>Buscar</P>
 			</Header>
 			<hr/>	
 			<main>

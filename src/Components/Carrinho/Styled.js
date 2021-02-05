@@ -35,7 +35,12 @@ export const Input = styled.input`
 export const Button = styled.button`
     display: flex;
     background-color: green;
-    width: 90%;
+    width: 50%;
+    margin: 10px auto;
+    border-radius: 8px;
+    @media (max-width: 540px){
+        width: 90%;
+    }
     height: 42px;
     border: none;
     justify-content: center;

@@ -20,7 +20,13 @@ export default function Carrinho(props) {
                     auth: window.localStorage.getItem('token'),
                 }
             })
-            .then((response) => data.requests.verificaPedido())
+            .then((response) => {
+                data.requests.verificaPedido()
+                data.setters.setValorTotal("")
+                data.setters.setCarrinho([])
+                data.setters.setCarrinhoDePostagem([])
+                data.setters.setCarrinhoRestaurantData([])
+            })
             .catch((error) => console.log(error));
     }
     //REMOVE ITEM DO CARRINHO
