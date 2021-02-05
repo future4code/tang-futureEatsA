@@ -49,7 +49,7 @@ function EditarCadastro() {
 					},
 				}
 			)
-			.then((response) => response)
+			.then((response) => { history.goBack()})
 			.catch((error) => console.log(error));
 	};
 
